@@ -9,15 +9,16 @@
 
 .TodosOsProdutos{
   display: grid;
-  grid-template: 1fr / 1fr 1fr;
+  grid-template: 1fr / 1fr 1fr 1fr;
   margin-top: 10px;
+  grid-gap: 10px;
 
 }
 
 .PrimeiraLinha{
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr 1fr;
-  grid-gap: 100px;
+  grid-gap: 50px;
 
 }
 
@@ -42,7 +43,4 @@ img{
 
 }
 
-button{
-  color: violet
-}
 

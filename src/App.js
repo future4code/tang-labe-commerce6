@@ -10,9 +10,7 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <Produtos/>
-        <div className="Produtos">
-          
-        </div>
+        
       </div>
     )
   }
