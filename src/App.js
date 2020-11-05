@@ -3,15 +3,17 @@ import './App.css';
 import Head from "./components/Header"
 import Produtos from "./components/Produtos"
 
+
 export default class App extends React.Component {
+  
   render(){
     return (
       <div className="App">
-        <Head/>
+        <Produtos/>
         <div className="Produtos">
-
+          
         </div>
       </div>
-    );
+    )
   }
 }

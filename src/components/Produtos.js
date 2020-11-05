@@ -1,14 +1,9 @@
 import React from 'react';
 import styled from 'styled-components'
 import Masculino from '../imgs/masculino.jpg'
-import Samus from '../imgs/samus.jpg'
+import Samus from '../imgs/samus.jpg'   
 import Feminino from "../imgs/modelofeminino.jpg"
 import Suit from "../imgs/suit.jpg"
-
-const BotaoAdicionarProduto = styled.button `
-    background-color: black;
-    font-family: 'Sans-serif';
-`
 
 
 export default class Produtos extends React.Component {
@@ -17,28 +12,51 @@ export default class Produtos extends React.Component {
     return (
         <div>
           <div className="TodosOsProdutos">
+          <div className="Filtros">
+                    <h3>Filtros</h3>
+                    <input/>
+                    <input/>
+                    <input/>
+                </div>
+            <div className="PrimeiraLinha">
                 <div className="Produto">
                     <img src={Masculino}/>
                     <p>Traje Espacial Despojado Porém Chique</p>
-                    <button>Comprar</button>
+                    <button id="botaoAdicionar">Comprar</button>
                 </div>
+
                 <div className="Produto">
                     <img src={Feminino}/>
                     <p>Traje Espacial Esporte Chique</p>
-                    <button>Comprar</button>
+                    <button id="botaoAdicionar">Comprar</button>
                 </div>
+
                 <div className="Produto">
                     <img src={Suit}/>
                     <p>Traje Espacial Bafafá Certeiro</p>
-                    <button>Comprar</button>
+                    <button id="botaoAdicionar">Comprar</button>
                 </div>
+
                 <div className="Produto">
                     <img src={Samus}/>
                     <p>Traje Espacial Samus Aram Afrontosa</p>
-                    <button>Comprar</button>
+                    <button id="botaoAdicionar">Comprar</button>
+                </div>
+
+                <div className="Produto">
+                    <img src={Samus}/>
+                    <p>Traje Espacial Samus Aram Afrontosa</p>
+                    <button id="botaoAdicionar">Comprar</button>
+                </div>
+
+                <div className="Produto">
+                    <img src={Samus}/>
+                    <p>Traje Espacial Samus Aram Afrontosa</p>
+                    <button id="botaoAdicionar">Comprar</button>
                 </div>
             </div>
-        </div>
+            </div>
+          </div>
       );
   }
 }
