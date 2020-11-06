@@ -9,6 +9,32 @@ import Outfit6 from "../imgs/Outfit6.png"
 
 export default class Produtos extends React.Component {
     state = {
+        produtos: [
+            {name: "Traje Espacial Despojado Porém Chique",
+             preco: 50,
+             img: Outfit1
+            },
+            {name:"Traje Espacial Esporte Chique",
+             preco: 100,
+             img: Outfit2
+            },
+            {name:"Traje Espacial Samus Aram Afrontosa",
+             preco: 150,
+             img: Outfit4
+            },
+            {name:"Traje Espacial Bafafá Certeiro",
+             preco: 200,
+             img: Outfit5
+            },
+            {name:"Traje Espacial Samus Aram Afrontosa",
+             preco: 250,
+             img: Outfit6
+            },
+            {name:"Traje Espacial Samus Aram Afrontosa",
+             preco: 300,
+             img: Outfit6
+            }
+        ],
         valorDoProdutoMin: "",
         valorDoProdutoMax: "",
         valorDoProdutoBusca: ""
@@ -27,21 +53,51 @@ export default class Produtos extends React.Component {
     }
 
     render(){
-        const valordoproduto = [50, 100, 150, 200, 250, 300]
-        /* caso de teste
-        const produtos = () => {
-            for (let i = 0; i < valordoproduto.length; i++) {
-                if(valordoproduto[i] >= this.state.valorDoProdutoMin){
+        const listaDeProdutos = this.state.produtos.map((produto) =>{
+            if(this.state.valorDoProdutoMin === "" || this.state.valorDoProdutoMax === "" || this.state.valorDoProdutoBusca === ""){
+                if(this.state.valorDoProdutoMin !== ""){
+                    if(this.state.valorDoProdutoMin <= produto.preco){
+                        return <div className="Produto">
+                            <img src={produto.img}/>
+                            <p>{produto.name}</p>
+                            <p>R$ {produto.preco}</p>
+                            <button id="botaoAdicionar">Comprar</button>
+                        </div>
+                    }
+                }
+
+                else if(this.state.valorDoProdutoMax !== ""){
+                    if(this.state.valorDoProdutoMax >= produto.preco){
+                        return <div className="Produto">
+                            <img src={produto.img}/>
+                            <p>{produto.name}</p>
+                            <p>R$ {produto.preco}</p>
+                            <button id="botaoAdicionar">Comprar</button>
+                        </div>
+                    }
+                }
+
+                else if(this.state.valorDoProdutoBusca !== ""){
+                    if(this.state.valorDoProdutoBusca === produto.name){
+                        return <div className="Produto">
+                            <img src={produto.img}/>
+                            <p>{produto.name}</p>
+                            <p>R$ {produto.preco}</p>
+                            <button id="botaoAdicionar">Comprar</button>
+                        </div>
+                    }
+                }
+
+                else{
                     return <div className="Produto">
-                        <img src={Outfit1}/>
-                        <p>Traje Espacial Despojado Porém Chique</p>
-                        <p>R$ {valordoproduto[0]}</p>
+                        <img src={produto.img}/>
+                        <p>{produto.name}</p>
+                        <p>R$ {produto.preco}</p>
                         <button id="botaoAdicionar">Comprar</button>
                     </div>
                 }
             }
-        }
-        */
+        })
 
         return (
             <div>
@@ -60,48 +116,7 @@ export default class Produtos extends React.Component {
                     </div>
 
                     <div className="PrimeiraLinha">
-                        
-                        <div className="Produto">
-                            <img src={Outfit1}/>
-                            <p>Traje Espacial Despojado Porém Chique</p>
-                            <p>R$ {valordoproduto[0]}</p>
-                            <button id="botaoAdicionar">Comprar</button>
-                        </div>
-
-                        <div className="Produto">
-                            <img src={Outfit2}/>
-                            <p>Traje Espacial Esporte Chique</p>
-                            <p>R$ {valordoproduto[1]}</p>
-                            <button id="botaoAdicionar">Comprar</button>
-                        </div>
-
-                        <div className="Produto">
-                            <img src={Outfit5}/>
-                            <p>Traje Espacial Bafafá Certeiro</p>
-                            <p>R$ {valordoproduto[2]}</p>
-                            <button id="botaoAdicionar">Comprar</button>
-                        </div>
-
-                        <div className="Produto">
-                            <img src={Outfit4}/>
-                            <p>Traje Espacial Samus Aram Afrontosa</p>
-                            <p>R$ {valordoproduto[3]}</p>
-                            <button id="botaoAdicionar">Comprar</button>
-                        </div>
-
-                        <div className="Produto">
-                            <img src={Outfit6}/>
-                            <p>Traje Espacial Samus Aram Afrontosa</p>
-                            <p>R$ {valordoproduto[4]}</p>
-                            <button id="botaoAdicionar">Comprar</button>
-                        </div>
-
-                        <div className="Produto">
-                            <img src={Outfit6}/>
-                            <p>Traje Espacial Samus Aram Afrontosa</p>
-                            <p>R$ {valordoproduto[5]}</p>
-                            <button id="botaoAdicionar">Comprar</button>
-                        </div>
+                        {listaDeProdutos}
                     </div>
 
                     <div className="Filtros">
