@@ -29,7 +29,18 @@ const imagem = styled.img
 
 export default class Head extends React.Component{
 
+    state = {
+        Capacete: false,
+        trajes: false,
+
+    }
     render(){
+
+        const teladousuario = () => {
+            if(this.state.Capacete){
+                return <capacetre/>
+            }
+        }
 
         return <div>
         <Menu>
@@ -44,6 +55,7 @@ export default class Head extends React.Component{
         </Menu>
         <div className="Produtos">
             <Produtos/>
+            {teladousuario()}
         </div>
     </div>
     }
