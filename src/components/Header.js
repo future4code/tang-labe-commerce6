@@ -54,7 +54,6 @@ export default class Head extends React.Component{
             </Cadalist>
         </Menu>
         <div className="Produtos">
-            <Produtos/>
             {teladousuario()}
         </div>
     </div>

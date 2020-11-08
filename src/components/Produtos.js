@@ -6,39 +6,43 @@ import Outfit4 from "../imgs/Outfit4.png"
 import Outfit5 from "../imgs/Outfit5.png"
 import Outfit6 from "../imgs/Outfit6.png"
 
+const produtos = [
+    {name: "Traje Espacial Despojado Porém Chique",
+     preco: 50,
+     img: Outfit1
+    },
+    {name:"Traje Espacial Esporte Chique",
+     preco: 100,
+     img: Outfit2
+    },
+    {name:"Traje Espacial Samus Aram Afrontosa",
+     preco: 150,
+     img: Outfit4
+    },
+    {name:"Traje Espacial Bafafá Certeiro",
+     preco: 200,
+     img: Outfit5
+    },
+    {name:"Traje Espacial Samus Aram Afrontosa",
+     preco: 250,
+     img: Outfit6
+    },
+    {name:"Traje Espacial Samus Aram Afrontosa",
+     preco: 300,
+     img: Outfit6
+    }
+]
 
 export default class Produtos extends React.Component {
     state = {
-        produtos: [
-            {name: "Traje Espacial Despojado Porém Chique",
-             preco: 50,
-             img: Outfit1
-            },
-            {name:"Traje Espacial Esporte Chique",
-             preco: 100,
-             img: Outfit2
-            },
-            {name:"Traje Espacial Samus Aram Afrontosa",
-             preco: 150,
-             img: Outfit4
-            },
-            {name:"Traje Espacial Bafafá Certeiro",
-             preco: 200,
-             img: Outfit5
-            },
-            {name:"Traje Espacial Samus Aram Afrontosa",
-             preco: 250,
-             img: Outfit6
-            },
-            {name:"Traje Espacial Samus Aram Afrontosa",
-             preco: 300,
-             img: Outfit6
-            }
-        ],
         valorDoProdutoMin: "",
         valorDoProdutoMax: "",
-        valorDoProdutoBusca: ""
+        valorDoProdutoBusca: "",
+        carrinho: [],
+        valorTotalDaCompra: ""
     }
+
+
 
     onchangeValorDoProdutoMin = (event) => {
         this.setState({valorDoProdutoMin: event.target.value})
@@ -52,8 +56,29 @@ export default class Produtos extends React.Component {
         this.setState({valorDoProdutoBusca: event.target.value})
     }
 
+    addcarrinho = (produto) => {
+        const produtoNoCarrinho = {
+            name: produto.name,
+            preco: produto.preco
+        }
+
+        const valorDoCarrinho = Number(this.state.valorTotalDaCompra) + produtoNoCarrinho.preco
+        this.setState({valorTotalDaCompra: valorDoCarrinho})
+
+        const novoCarrinho = [...this.state.carrinho, produtoNoCarrinho]
+        this.setState({carrinho: novoCarrinho})
+    }
+
     render(){
-        const Filtro = this.state.produtos.map((produto) =>{
+        
+        const carrinhoDeCompras = this.state.carrinho.map((produto) => {
+            return <div>
+                <p>{produto.name}</p>
+                <p>R$ {produto.preco}</p>
+            </div>
+        })
+
+        const Filtro = produtos.map((produto) =>{
             if(this.state.valorDoProdutoMin !== ""){
                 if(this.state.valorDoProdutoMin <= produto.preco){
                     return <div className="Produto">
@@ -92,7 +117,7 @@ export default class Produtos extends React.Component {
                     <img src={produto.img}/>
                     <p>{produto.name}</p>
                     <p>R$ {produto.preco}</p>
-                    <button id="botaoAdicionar">Comprar</button>
+                    <button id="botaoAdicionar" onClick={() => this.addcarrinho(produto)} >Comprar</button>
                 </div>
             }
         })
@@ -119,7 +144,9 @@ export default class Produtos extends React.Component {
 
                     <div className="Filtros">
                         <h3>Carrinho</h3>
-                
+                        {carrinhoDeCompras}
+                        <h4>Valor Total</h4>
+                        {this.state.valorTotalDaCompra}
                     </div>
 
                 </div>
@@ -127,3 +154,30 @@ export default class Produtos extends React.Component {
         );
     }
 }
+
+/*
+const onAddProductToCart = (productId) => {
+    const productInCart = this.state.productsInCart.find(product => productId === product.id)
+
+    if(productInCart) {
+      const newProductsInCart = this.state.productsInCart.map(product => {
+        if(productId === product.id) {
+          return {
+            ...product,
+            quantity: product.quantity + 1
+          }
+        }
+
+        return product
+      })
+
+      this.setState({productsInCart: newProductsInCart})
+    } else {
+      const productToAdd = products.find(product => productId === product.id)
+
+      const newProductsInCart = [...this.state.productsInCart, {...productToAdd, quantity: 1}]
+
+      this.setState({productsInCart: newProductsInCart})
+    }
+  }
+*/
