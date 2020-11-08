@@ -11,44 +11,7 @@ import Outfit6 from "../imgs/Outfit6.png"
 export default class Produtos extends React.Component {
     state = {
         produtos: [
-            {
-             id: Date.now(),
-             name: "Traje Espacial Despojado Porém Chique",
-             preco: 50,
-             img: Outfit1
-            },
-            {
-             id: Date.now(),
-             name:"Traje Espacial Esporte Chique",
-             preco: 100,
-             img: Outfit2
-            },
-            {
-             id: Date.now(),
-             name:"Traje Espacial Samus Aram Afrontosa",
-             preco: 150,
-             img: Outfit4
-            },
-            {
-             id: Date.now(),
-             name:"Traje Espacial Bafafá Certeiro",
-             preco: 200,
-             img: Outfit5
-            },
-            {
-             id: Date.now(),
-             name:"Traje Espacial Samus Aram Afrontosa",
-             preco: 250,
-             img: Outfit6
-            },
-            {
-             id: Date.now(),
-             name:"Traje Espacial Samus Aram Afrontosa",
-             preco: 300,
-             img: Outfit6
-            },
-        ],
-        produtosCarrinho: "",
+
         valorDoProdutoMin: "",
         valorDoProdutoMax: "",
         valorDoProdutoBusca: ""
@@ -90,16 +53,7 @@ export default class Produtos extends React.Component {
     }       
      */
     render(){
-         const produtoNovo = this.state.produtos.map((novaListaDeProdutos) => {
-           /*  if(novaListaDeProdutos.id === Date.now) */
-            return(
-              <div>
-                <p>{novaListaDeProdutos.name}</p>
-                <p>{novaListaDeProdutos.preco}</p>
-              </div>
-            )
-          }
-          ) 
+
         const Filtro = this.state.produtos.map((produto) =>{
             if(this.state.valorDoProdutoMin !== ""){
                 if(this.state.valorDoProdutoMin <= produto.preco){
@@ -107,21 +61,11 @@ export default class Produtos extends React.Component {
                         <img src={produto.img}/>
                         <p>{produto.name}</p>
                         <p>R$ {produto.preco}</p>
-                        <button id="botaoAdicionar" onClick={this.adicionarAoCarrinho}>Comprar</button>
+
                     </div>
                 }
             }
 
-            else if(this.state.valorDoProdutoMax !== ""){
-                if(this.state.valorDoProdutoMax >= produto.preco){
-                    return <div className="Produto">
-                        <img src={produto.img}/>
-                        <p>{produto.name}</p>
-                        <p>R$ {produto.preco}</p>
-                        <button id="botaoAdicionar" onClick={this.adicionarAoCarrinho}> Comprar</button>
-                    </div>
-                }
-            }
 
             else if(this.state.valorDoProdutoBusca !== ""){
                 if(this.state.valorDoProdutoBusca === produto.name){
@@ -129,7 +73,7 @@ export default class Produtos extends React.Component {
                         <img src={produto.img}/>
                         <p>{produto.name}</p>
                         <p>R$ {produto.preco}</p>
-                        <button id="botaoAdicionar" onClick={this.adicionarAoCarrinho}>Comprar</button>
+
                     </div>
                 }
             }
@@ -139,7 +83,7 @@ export default class Produtos extends React.Component {
                     <img src={produto.img}/>
                     <p>{produto.name}</p>
                     <p>R$ {produto.preco}</p>
-                    <button id="botaoAdicionar" onClick={this.adicionarAoCarrinho}>Comprar</button>
+
                 </div>
             }
         })
