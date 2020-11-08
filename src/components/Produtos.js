@@ -154,30 +154,3 @@ export default class Produtos extends React.Component {
         );
     }
 }
-
-/*
-const onAddProductToCart = (productId) => {
-    const productInCart = this.state.productsInCart.find(product => productId === product.id)
-
-    if(productInCart) {
-      const newProductsInCart = this.state.productsInCart.map(product => {
-        if(productId === product.id) {
-          return {
-            ...product,
-            quantity: product.quantity + 1
-          }
-        }
-
-        return product
-      })
-
-      this.setState({productsInCart: newProductsInCart})
-    } else {
-      const productToAdd = products.find(product => productId === product.id)
-
-      const newProductsInCart = [...this.state.productsInCart, {...productToAdd, quantity: 1}]
-
-      this.setState({productsInCart: newProductsInCart})
-    }
-  }
-*/
