@@ -1,5 +1,4 @@
 import React from 'react';
-import { isElementOfType } from 'react-dom/test-utils';
 import styled from 'styled-components'
 import Outfit1 from '../imgs/Outfit1.png'
 import Outfit2 from '../imgs/Outfit2.png'   
@@ -7,17 +6,44 @@ import Outfit4 from "../imgs/Outfit4.png"
 import Outfit5 from "../imgs/Outfit5.png"
 import Outfit6 from "../imgs/Outfit6.png"
 
+const produtos = [
+    {name: "Traje Espacial Despojado Porém Chique",
+     preco: 50,
+     img: Outfit1
+    },
+    {name:"Traje Espacial Esporte Chique",
+     preco: 100,
+     img: Outfit2
+    },
+    {name:"Traje Espacial Samus Aram Afrontosa",
+     preco: 150,
+     img: Outfit4
+    },
+    {name:"Traje Espacial Bafafá Certeiro",
+     preco: 200,
+     img: Outfit5
+    },
+    {name:"Traje Espacial Samus Aram Afrontosa",
+     preco: 250,
+     img: Outfit6
+    },
+    {name:"Traje Espacial Samus Aram Afrontosa",
+     preco: 300,
+     img: Outfit6
+    }
+]
 
 export default class Produtos extends React.Component {
     state = {
-        produtos: [
-
         valorDoProdutoMin: "",
         valorDoProdutoMax: "",
-        valorDoProdutoBusca: ""
+        valorDoProdutoBusca: "",
+        carrinho: [],
+        valorTotalDaCompra: ""
     }
 
-    
+
+
     onchangeValorDoProdutoMin = (event) => {
         this.setState({valorDoProdutoMin: event.target.value})
     }
@@ -30,42 +56,50 @@ export default class Produtos extends React.Component {
         this.setState({valorDoProdutoBusca: event.target.value})
     }
 
-    adicionarAoCarrinho = () => {
-        const produtoCarrinho = {
-            name: this.state.produtos.name,
-            preco: this.state.produtos.preco
+    addcarrinho = (produto) => {
+        const produtoNoCarrinho = {
+            name: produto.name,
+            preco: produto.preco
         }
-        const novosProdutos = [...this.state.produtos, produtoCarrinho]
-        this.setState({produtos: novosProdutos})
-        
+
+        const valorDoCarrinho = Number(this.state.valorTotalDaCompra) + produtoNoCarrinho.preco
+        this.setState({valorTotalDaCompra: valorDoCarrinho})
+
+        const novoCarrinho = [...this.state.carrinho, produtoNoCarrinho]
+        this.setState({carrinho: novoCarrinho})
     }
 
-    /* adicionarAoCarrinho = (produtoEspecifico) => {
-    const copiaDosProdutos = this.state.produtos.filter((elemento) => {
-        if(elemento.id !== Date.now()){
-            return false;
-        } else {
-            return <p>{elemento.name} - {elemento.preco}</p>
-        }
-    });
-       const produtosNoCarrinho = [...this.state.produtos, copiaDosProdutos]
-       this.setState({produtos: produtosNoCarrinho}) 
-    }       
-     */
     render(){
+        
+        const carrinhoDeCompras = this.state.carrinho.map((produto) => {
+            return <div>
+                <p>{produto.name}</p>
+                <p>R$ {produto.preco}</p>
+            </div>
+        })
 
-        const Filtro = this.state.produtos.map((produto) =>{
+        const Filtro = produtos.map((produto) =>{
             if(this.state.valorDoProdutoMin !== ""){
                 if(this.state.valorDoProdutoMin <= produto.preco){
                     return <div className="Produto">
                         <img src={produto.img}/>
                         <p>{produto.name}</p>
                         <p>R$ {produto.preco}</p>
-
+                        <button id="botaoAdicionar">Comprar</button>
                     </div>
                 }
             }
 
+            else if(this.state.valorDoProdutoMax !== ""){
+                if(this.state.valorDoProdutoMax >= produto.preco){
+                    return <div className="Produto">
+                        <img src={produto.img}/>
+                        <p>{produto.name}</p>
+                        <p>R$ {produto.preco}</p>
+                        <button id="botaoAdicionar">Comprar</button>
+                    </div>
+                }
+            }
 
             else if(this.state.valorDoProdutoBusca !== ""){
                 if(this.state.valorDoProdutoBusca === produto.name){
@@ -73,7 +107,7 @@ export default class Produtos extends React.Component {
                         <img src={produto.img}/>
                         <p>{produto.name}</p>
                         <p>R$ {produto.preco}</p>
-
+                        <button id="botaoAdicionar">Comprar</button>
                     </div>
                 }
             }
@@ -83,7 +117,7 @@ export default class Produtos extends React.Component {
                     <img src={produto.img}/>
                     <p>{produto.name}</p>
                     <p>R$ {produto.preco}</p>
-
+                    <button id="botaoAdicionar" onClick={() => this.addcarrinho(produto)} >Comprar</button>
                 </div>
             }
         })
@@ -110,12 +144,13 @@ export default class Produtos extends React.Component {
 
                     <div className="Filtros">
                         <h3>Carrinho</h3>
-                        <p>{produtoNovo}</p>
+                        {carrinhoDeCompras}
+                        <h4>Valor Total</h4>
+                        {this.state.valorTotalDaCompra}
                     </div>
 
                 </div>
             </div>
         );
-        }
     }
-
+}
