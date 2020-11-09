@@ -39,7 +39,7 @@ export default class Produtos extends React.Component {
         valorDoProdutoMax: "",
         valorDoProdutoBusca: "",
         carrinho: [],
-        valorTotalDaCompra: 0.00
+        valorTotalDaCompra: 0
     }
 
     onchangeValorDoProdutoMin = (event) => {
@@ -70,7 +70,7 @@ export default class Produtos extends React.Component {
     removeDoCarrinho = (name) => {
         const novoCarrinho = this.state.carrinho.map((produto) => {
           if(produto.name === name) {
-            const valorDoCarrinho = 0.00
+            const valorDoCarrinho = Number(this.state.valorTotalDaCompra) - produto.preco
             this.setState({valorTotalDaCompra: valorDoCarrinho})
             return {...produto}
           }
