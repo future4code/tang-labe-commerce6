@@ -39,10 +39,8 @@ export default class Produtos extends React.Component {
         valorDoProdutoMax: "",
         valorDoProdutoBusca: "",
         carrinho: [],
-        valorTotalDaCompra: ""
+        valorTotalDaCompra: 0
     }
-
-
 
     onchangeValorDoProdutoMin = (event) => {
         this.setState({valorDoProdutoMin: event.target.value})
@@ -69,12 +67,26 @@ export default class Produtos extends React.Component {
         this.setState({carrinho: novoCarrinho})
     }
 
+    removeDoCarrinho = (name) => {
+        const novoCarrinho = this.state.carrinho.map((produto) => {
+          if(produto.name === name) {
+            const valorDoCarrinho = Number(this.state.valorTotalDaCompra) - produto.preco
+            this.setState({valorTotalDaCompra: valorDoCarrinho})
+            return {...produto}
+          }
+          
+          return produto
+        }).filter((produto) => produto.name !== name)
+    
+        this.setState({carrinho: novoCarrinho})
+    }
+
     render(){
         
         const carrinhoDeCompras = this.state.carrinho.map((produto) => {
             return <div>
                 <p>{produto.name}</p>
-                <p>R$ {produto.preco}</p>
+                <p onClick={() => this.removeDoCarrinho(produto.name)}>R$ {produto.preco}</p>
             </div>
         })
 
