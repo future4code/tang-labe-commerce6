@@ -1,63 +1,42 @@
-import React from 'react';
-import styled from "styled-components"
-import Produtos from './Produtos';
-import Logo from '../imgs/Capacete_Logo.jpeg'
+import React, { useContext, useState } from 'react';
+import styles from '../styles/components/Header.module.css'
+import Lupe from "../img/icons/search.svg"
+import GlobalStateContext from '../Global/GlobalStateContext';
 
+export function Header() {
+    const data = useContext(GlobalStateContext)
+    const [search, setSearch] = useState("")
 
-const Menu = styled.div`
-    display: flex;
-    justify-content: center;
-    background-color: #f7f7f7;
-`
-const Cadalist = styled.ul`
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-`
+    return (
+        <div className={styles.headerContainer}>
+            <div className={styles.logoContainer}>
+                Space Shopping
+            </div>
 
-const Cadali = styled.li`
-    align-self: center;
-    margin-right: 50px;
-`
-const LogoEstilizado = styled.img `
-    width: 12vw;
-    height: 15vh;
-    margin-right: 20px;
-`
-const imagem = styled.img
+            <div className={styles.searchContainer}>
+                <input type="text" 
+                onKeyDown={(e) => {
+                        if(e.key === "Enter"){
+                            data.setters.setSearch(search)
+                        }
+                    } 
+                }
+                onChange={(event) => {setSearch(event.target.value)}}
+                value={search}/>
 
+                <img src={Lupe} alt="busca"
+                onClick={() => {data.setters.setSearch(search)}}
+                />
+            </div>
 
-export default class Head extends React.Component{
-
-    state = {
-        Capacete: false,
-        trajes: false,
-
-    }
-    render(){
-
-        const teladousuario = () => {
-            if(this.state.Capacete){
-                return <capacetre/>
-            }
-        }
-
-        return <div>
-        <Menu>
-            <Cadalist>
-                <LogoEstilizado src={Logo}/>
-                <Cadali>Capacetes</Cadali>
-                <Cadali>Trajes</Cadali>
-                <Cadali>Botas</Cadali>
-                <Cadali>Luvas</Cadali>
-                <Cadali>Mochila</Cadali>
-            </Cadalist>
-        </Menu>
-        <div className="Produtos">
-            <Produtos/>
-            {teladousuario()}
+            <div className={styles.userContainer}>
+                <span className={styles.userIcon}
+                onClick={() => {alert("Still working")}}
+                ></span>
+                <span className={styles.cartIcon} 
+                onClick={() => { data.setters.setCartOn(!data.states.cartOn) }}
+                ><span>{data.states.cartItems.length}</span></span>
+            </div>
         </div>
-    </div>
-    }
-  
+    );
 }

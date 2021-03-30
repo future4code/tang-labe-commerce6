@@ -1,17 +1,21 @@
-import React from 'react';
-import './App.css';
-import Head from "./components/Header"
-import Produtos from "./components/Produtos"
+import React from 'react'
+import { Header } from './components/Header'
+import { Filter } from './components/Filter'
+import { Body } from './components/Body'
+import './styles/global.css'
+import { Cart } from './components/Cart'
+import GlobalState from './Global/GlobalContext'
 
+export default function App() {
 
-export default class App extends React.Component {
-  
-  render(){
-    return (
-      <div className="App">
-        <Produtos/>
-        
-      </div>
-    )
-  }
+  return (
+    <div className="App">
+      <GlobalState>
+        <Header />
+        <Filter />
+        <Body />
+        <Cart />
+      </GlobalState>
+    </div>
+  );
 }
